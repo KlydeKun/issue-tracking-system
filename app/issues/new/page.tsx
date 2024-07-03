@@ -25,24 +25,13 @@ const NewIssuePage = () => {
     >
       <TextField.Root placeholder="Title" {...register("title")} />
 
-      {/* TODO:
-       Controller is the cause of having GET request server error */}
-      {/* <Controller
+      <Controller
         name="description"
         control={control}
-        // render={({ field }) => (
-        //   <SimpleMDE placeholder="Description" {...field} />
-        // )}
         render={({ field }) => (
-          <SimpleMDE
-            {...field}
-            onChange={(value) => field.onChange(value)}
-            options={{
-              placeholder: "Description",
-            }}
-          />
+          <SimpleMDE placeholder="Description" {...field} />
         )}
-      /> */}
+      />
       <Button>Submit New Issue</Button>
     </form>
   );
