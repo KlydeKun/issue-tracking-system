@@ -13,19 +13,18 @@ import { z } from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
 import delay from "delay";
-import IssueForm from "../_components/IssueForm";
+import { Issue } from "@prisma/client";
 
-type IssueForm = z.infer<typeof createIssueSchema>;
-delay(3000);
+type IssueFormData = z.infer<typeof createIssueSchema>;
 
-const NewIssuePage = () => {
+const IssueForm = ({ issue }: { issue?: Issue }) => {
   const router = useRouter();
   const {
     register,
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<IssueForm>({
+  } = useForm<IssueFormData>({
     resolver: zodResolver(createIssueSchema),
   });
   const [error, setError] = useState("");
@@ -42,7 +41,35 @@ const NewIssuePage = () => {
     }
   });
 
-  return <IssueForm />;
+  return (
+    <div className="max-w-xl">
+      {error && (
+        <Callout.Root color="red" className="mb-5">
+          <Callout.Text>{error}</Callout.Text>
+        </Callout.Root>
+      )}
+      <form className="space-y-3" onSubmit={onSubmit}>
+        <TextField.Root
+          defaultValue={issue?.title}
+          placeholder="Title"
+          {...register("title")}
+        />
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>
+        <Controller
+          name="description"
+          control={control}
+          defaultValue={issue?.description}
+          render={({ field }) => (
+            <SimpleMdeReact placeholder="Description" {...field} />
+          )}
+        />
+        <ErrorMessage>{errors.description?.message}</ErrorMessage>
+        <Button disabled={isSubmit}>
+          Submit New Issue {isSubmit && <Spinner />}
+        </Button>
+      </form>
+    </div>
+  );
 };
 
-export default NewIssuePage;
+export default IssueForm;
