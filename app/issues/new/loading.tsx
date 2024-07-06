@@ -5,10 +5,13 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const LoadingNewIssuePage = () => {
   return (
-    <Box className="max-w-xl">
-      <Skeleton />
-      <Skeleton height="20rem" />
-    </Box>
+    // <Box className="max-w-xl">
+    //   <Skeleton />
+    //   <Skeleton className="h-[20rem]" />
+    // </Box>
+    <div>
+      <h1>Loading...</h1>
+    </div>
   );
 };
 
