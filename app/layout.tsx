@@ -20,13 +20,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en">
       <QueryClientProvider>
-        <body className={inter.variable}>
+        <body className={inter.variable} >
           <AuthProvider>
             <Theme accentColor="violet" appearance="light">
               <NavBar />
