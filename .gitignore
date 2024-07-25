@@ -36,3 +36,5 @@ next-env.d.ts
 
 # Secret
 .env
+# Sentry Config File
+.env.sentry-build-plugin
