@@ -8,6 +8,7 @@ CREATE TABLE `Issue` (
     `updateAt` DATETIME(3) NOT NULL,
     `assignedToUserId` VARCHAR(255) NULL,
 
+    INDEX `Issue_assignedToUserId_idx`(`assignedToUserId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -26,6 +27,7 @@ CREATE TABLE `Account` (
     `id_token` TEXT NULL,
     `session_state` VARCHAR(191) NULL,
 
+    INDEX `Account_user_id_idx`(`user_id`),
     UNIQUE INDEX `Account_provider_provider_account_id_key`(`provider`, `provider_account_id`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -38,6 +40,7 @@ CREATE TABLE `Session` (
     `expires` DATETIME(3) NOT NULL,
 
     UNIQUE INDEX `Session_session_token_key`(`session_token`),
+    INDEX `Session_user_id_idx`(`user_id`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
