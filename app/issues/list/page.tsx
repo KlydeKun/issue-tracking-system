@@ -46,7 +46,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
         currentPage={page}
         itemCount={issueCount} 
       />
-    </Flex>
+    </Flex> 
   );
 };
 
